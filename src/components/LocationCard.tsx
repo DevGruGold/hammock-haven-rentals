@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 
@@ -15,6 +16,13 @@ interface PriceRanges {
   night: PriceRange;
 }
 
+interface AddOn {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+}
+
 interface LocationCardProps {
   title: string;
   description: string;
@@ -27,6 +35,22 @@ interface LocationCardProps {
 const LocationCard = ({ title, description, price, image, onBook, priceRanges }: LocationCardProps) => {
   const [currentTimeSlot, setCurrentTimeSlot] = useState<keyof PriceRanges>("day");
   const [currentPrice, setCurrentPrice] = useState(price);
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>([]);
+
+  const addOns: AddOn[] = [
+    {
+      id: "headphones",
+      name: "Noise-Canceling Headphones",
+      price: 5,
+      description: "Premium headphones for ultimate relaxation"
+    },
+    {
+      id: "herbal",
+      name: "Herbal Remedies Package",
+      price: 8,
+      description: "Local organic tea and aromatherapy"
+    }
+  ];
 
   useEffect(() => {
     const updateTimeSlot = () => {
@@ -47,10 +71,24 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
     return () => clearInterval(interval);
   }, [price, priceRanges]);
 
+  const getTotalPrice = () => {
+    const addOnsTotal = selectedAddOns.reduce((total, addOnId) => {
+      const addOn = addOns.find(a => a.id === addOnId);
+      return total + (addOn?.price || 0);
+    }, 0);
+    return currentPrice + addOnsTotal;
+  };
+
   const handleBooking = () => {
     const phoneNumber = "50661500559";
+    const selectedAddOnsText = selectedAddOns.length > 0
+      ? "\nAdd-ons: " + selectedAddOns.map(id => 
+          addOns.find(a => a.id === id)?.name
+        ).join(", ")
+      : "";
+    
     const message = encodeURIComponent(
-      `Hello! I would like to book a hammock at ${title} for $${currentPrice}/hour during ${priceRanges[currentTimeSlot].description}. Please provide available time slots.`
+      `Hello! I would like to book a hammock at ${title} for $${getTotalPrice()}/hour during ${priceRanges[currentTimeSlot].description}.${selectedAddOnsText}\nPlease provide available time slots.`
     );
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     
@@ -77,6 +115,42 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
           <p className="text-lg font-bold text-ocean">${currentPrice}/hour</p>
           <p className="text-sm text-gray-500">{priceRanges[currentTimeSlot].description}</p>
         </div>
+        <div className="mt-4 space-y-3">
+          <p className="font-semibold text-sm text-forest">Enhance your experience:</p>
+          {addOns.map((addOn) => (
+            <div key={addOn.id} className="flex items-start space-x-2">
+              <Checkbox
+                id={addOn.id}
+                checked={selectedAddOns.includes(addOn.id)}
+                onCheckedChange={(checked) => {
+                  setSelectedAddOns(prev =>
+                    checked
+                      ? [...prev, addOn.id]
+                      : prev.filter(id => id !== addOn.id)
+                  );
+                }}
+              />
+              <div className="grid gap-1.5 leading-none">
+                <label
+                  htmlFor={addOn.id}
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  {addOn.name} (+${addOn.price})
+                </label>
+                <p className="text-xs text-muted-foreground">
+                  {addOn.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+        {selectedAddOns.length > 0 && (
+          <div className="mt-4">
+            <p className="text-sm font-semibold text-forest">
+              Total: ${getTotalPrice()}/hour
+            </p>
+          </div>
+        )}
       </CardContent>
       <CardFooter>
         <Button onClick={handleBooking} className="w-full bg-forest hover:bg-leaf">
