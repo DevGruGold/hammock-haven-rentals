@@ -18,11 +18,19 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        serif: ['Cormorant Garamond', 'serif'],
+      },
       colors: {
         forest: "#2D5A27",
         sand: "#E6D5B8",
         ocean: "#1B4965",
         leaf: "#4A7C59",
+        cloud: {
+          light: "#F2FCE2",
+          DEFAULT: "#D3E4FD",
+          dark: "#E5DEFF",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
