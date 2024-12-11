@@ -40,15 +40,15 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
   const addOns: AddOn[] = [
     {
       id: "headphones",
-      name: "Noise-Canceling Headphones",
+      name: "Audífonos con Cancelación de Ruido | Noise-Canceling Headphones",
       price: 5,
-      description: "Premium headphones for ultimate relaxation"
+      description: "Audífonos premium para relajación máxima | Premium headphones for ultimate relaxation"
     },
     {
       id: "herbal",
-      name: "Herbal Remedies Package",
+      name: "Paquete de Remedios Herbales | Herbal Remedies Package",
       price: 8,
-      description: "Local organic tea and aromatherapy"
+      description: "Té orgánico local y aromaterapia | Local organic tea and aromatherapy"
     }
   ];
 
@@ -82,18 +82,18 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
   const handleBooking = () => {
     const phoneNumber = "50661500559";
     const selectedAddOnsText = selectedAddOns.length > 0
-      ? "\nAdd-ons: " + selectedAddOns.map(id => 
+      ? "\nExtras | Add-ons: " + selectedAddOns.map(id => 
           addOns.find(a => a.id === id)?.name
         ).join(", ")
       : "";
     
     const message = encodeURIComponent(
-      `Hello! I would like to book a hammock at ${title} for $${getTotalPrice()}/hour during ${priceRanges[currentTimeSlot].description}.${selectedAddOnsText}\nPlease provide available time slots.`
+      `¡Hola! Me gustaría reservar una hamaca en ${title} por $${getTotalPrice()}/hora durante ${priceRanges[currentTimeSlot].description}.${selectedAddOnsText}\nPor favor, proporcione horarios disponibles. | Hello! I would like to book a hammock at ${title} for $${getTotalPrice()}/hour during ${priceRanges[currentTimeSlot].description}.${selectedAddOnsText}\nPlease provide available time slots.`
     );
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     
     window.open(whatsappUrl, "_blank");
-    toast.success("Opening WhatsApp to complete your booking!");
+    toast.success("¡Abriendo WhatsApp para completar su reserva! | Opening WhatsApp to complete your booking!");
     onBook();
   };
 
@@ -112,11 +112,11 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
       <CardContent>
         <p className="text-sm text-gray-600">{description}</p>
         <div className="mt-4">
-          <p className="text-lg font-bold text-ocean">${currentPrice}/hour</p>
+          <p className="text-lg font-bold text-ocean">${currentPrice}/hora | /hour</p>
           <p className="text-sm text-gray-500">{priceRanges[currentTimeSlot].description}</p>
         </div>
         <div className="mt-4 space-y-3">
-          <p className="font-semibold text-sm text-forest">Enhance your experience:</p>
+          <p className="font-semibold text-sm text-forest">Mejore su experiencia | Enhance your experience:</p>
           {addOns.map((addOn) => (
             <div key={addOn.id} className="flex items-start space-x-2">
               <Checkbox
@@ -147,14 +147,14 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
         {selectedAddOns.length > 0 && (
           <div className="mt-4">
             <p className="text-sm font-semibold text-forest">
-              Total: ${getTotalPrice()}/hour
+              Total: ${getTotalPrice()}/hora | /hour
             </p>
           </div>
         )}
       </CardContent>
       <CardFooter>
         <Button onClick={handleBooking} className="w-full bg-forest hover:bg-leaf">
-          Book Now
+          Reservar Ahora | Book Now
         </Button>
       </CardFooter>
     </Card>
