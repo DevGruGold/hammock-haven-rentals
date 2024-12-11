@@ -6,7 +6,7 @@ const Index = () => {
     <div className="min-h-screen bg-sand/20">
       <header className="bg-forest py-12 text-white">
         <div className="container">
-          <h1 className="text-4xl font-bold md:text-5xl">Hammock Paradise</h1>
+          <h1 className="text-4xl font-bold md:text-5xl">Hammock Heaven</h1>
           <p className="mt-4 text-lg text-sand">
             Discover peaceful retreats in Costa Rica's most beautiful locations
           </p>
@@ -20,7 +20,7 @@ const Index = () => {
       
       <footer className="mt-16 bg-forest py-8 text-white">
         <div className="container text-center">
-          <p>© 2024 Hammock Paradise. All rights reserved.</p>
+          <p>© 2024 Hammock Heaven. All rights reserved.</p>
         </div>
       </footer>
     </div>
