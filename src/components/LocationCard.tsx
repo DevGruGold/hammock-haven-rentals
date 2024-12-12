@@ -98,7 +98,7 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
   };
 
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-lg">
+    <Card className="overflow-hidden transition-all hover:shadow-lg bg-cloud-light">
       <div className="aspect-[16/9] overflow-hidden">
         <img
           src={image}
@@ -107,16 +107,16 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
         />
       </div>
       <CardHeader>
-        <CardTitle className="text-xl font-semibold text-forest">{title}</CardTitle>
+        <CardTitle className="text-xl font-semibold text-forest-dark">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-sm text-gray-600">{description}</p>
+        <p className="text-sm text-forest-dark/80">{description}</p>
         <div className="mt-4">
-          <p className="text-lg font-bold text-ocean">${currentPrice}/hora | /hour</p>
-          <p className="text-sm text-gray-500">{priceRanges[currentTimeSlot].description}</p>
+          <p className="text-lg font-bold text-ocean-dark">${currentPrice}/hora | /hour</p>
+          <p className="text-sm text-forest-dark/70">{priceRanges[currentTimeSlot].description}</p>
         </div>
         <div className="mt-4 space-y-3">
-          <p className="font-semibold text-sm text-forest">Mejore su experiencia | Enhance your experience:</p>
+          <p className="font-semibold text-sm text-forest-dark">Mejore su experiencia | Enhance your experience:</p>
           {addOns.map((addOn) => (
             <div key={addOn.id} className="flex items-start space-x-2">
               <Checkbox
@@ -133,11 +133,11 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
               <div className="grid gap-1.5 leading-none">
                 <label
                   htmlFor={addOn.id}
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  className="text-sm font-medium leading-none text-forest-dark peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                   {addOn.name} (+${addOn.price})
                 </label>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-forest-dark/70">
                   {addOn.description}
                 </p>
               </div>
@@ -146,14 +146,14 @@ const LocationCard = ({ title, description, price, image, onBook, priceRanges }:
         </div>
         {selectedAddOns.length > 0 && (
           <div className="mt-4">
-            <p className="text-sm font-semibold text-forest">
+            <p className="text-sm font-semibold text-forest-dark">
               Total: ${getTotalPrice()}/hora | /hour
             </p>
           </div>
         )}
       </CardContent>
       <CardFooter>
-        <Button onClick={handleBooking} className="w-full bg-forest hover:bg-leaf">
+        <Button onClick={handleBooking} className="w-full bg-forest hover:bg-forest-dark text-cloud-light font-medium">
           Reservar Ahora | Book Now
         </Button>
       </CardFooter>

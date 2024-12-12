@@ -22,14 +22,30 @@ export default {
         serif: ['Cormorant Garamond', 'serif'],
       },
       colors: {
-        forest: "#2D5A27",
-        sand: "#E6D5B8",
-        ocean: "#1B4965",
-        leaf: "#4A7C59",
+        forest: {
+          light: "#4A7C59",
+          DEFAULT: "#2D5A27",
+          dark: "#1A4016"
+        },
+        sand: {
+          light: "#F4E9D7",
+          DEFAULT: "#E6D5B8",
+          dark: "#C4B095"
+        },
+        ocean: {
+          light: "#2D6A8E",
+          DEFAULT: "#1B4965",
+          dark: "#0D3249"
+        },
+        leaf: {
+          light: "#6B9E7A",
+          DEFAULT: "#4A7C59",
+          dark: "#2E5A3D"
+        },
         cloud: {
-          light: "#F2FCE2",
-          DEFAULT: "#D3E4FD",
-          dark: "#E5DEFF",
+          light: "#FFFFFF",
+          DEFAULT: "#F0F7FF",
+          dark: "#E5EEFF"
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
