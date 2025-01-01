@@ -1,5 +1,6 @@
 import FilterBar from "@/components/FilterBar";
 import LocationGrid from "@/components/LocationGrid";
+import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
@@ -26,6 +27,15 @@ const Index = () => {
             <p className="text-lg text-forest-dark/80 font-medium">
               Descubre retiros pacíficos en los lugares más hermosos de Costa Rica
             </p>
+            <div className="mt-6 flex justify-center space-x-4">
+              <Button 
+                variant="default" 
+                className="bg-forest-dark text-cloud-light hover:bg-forest-dark/80"
+                onClick={() => window.open('https://crpay.vercel.app/', '_blank')}
+              >
+                Pagar / Pay Now
+              </Button>
+            </div>
           </div>
         </div>
       </header>
